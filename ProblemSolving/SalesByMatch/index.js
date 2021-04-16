@@ -26,40 +26,17 @@ function readLine() {
 }
 
 // Complete the sockMerchant function below.
-function sockMerchant(numberOfSockets, arrayOfSockets) {
-  let numberOfPairs = 0;
-
-  for (let index = 0; index < numberOfSockets; index++) {
-    const firstSocket = arrayOfSockets[0];
-
-    if (arrayOfSockets.length < 2 || firstSocket === undefined) {
-      break;
+function sockMerchant(n, ar) {
+  let ones = {};
+  return ar.reduce((pairs, i) => {
+    if (ones[i]) {
+      delete ones[i];
+      return pairs + 1;
+    } else {
+      ones[i] = true;
+      return pairs;
     }
-
-    for (
-      let segundoIndex = 0;
-      segundoIndex < arrayOfSockets.length;
-      segundoIndex++
-    ) {
-      if (segundoIndex === 0) {
-        continue;
-      }
-
-      const secondSocket = arrayOfSockets[segundoIndex];
-      if (firstSocket === secondSocket) {
-        arrayOfSockets.splice(arrayOfSockets.indexOf(firstSocket), 1);
-        arrayOfSockets.splice(arrayOfSockets.indexOf(secondSocket), 1);
-        numberOfPairs += 1;
-        break;
-      }
-
-      if (segundoIndex + 1 === arrayOfSockets.length) {
-        arrayOfSockets.splice(0, 1);
-      }
-    }
-  }
-
-  return numberOfPairs;
+  }, 0);
 }
 
 function main() {
